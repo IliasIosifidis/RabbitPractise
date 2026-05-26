@@ -19,4 +19,11 @@ public class TaskController {
     System.out.println("PUBLISHED" + payload);
     return "queued";
   }
+
+  @PostMapping("/orders")
+  public String submitOrder(@RequestBody String payload){
+    rabbitTemplate.convertAndSend(RabbitConfig.ORDER_EXCHANGE, "", payload);
+    System.out.println("ORDER PUBLISHED: " + payload);
+    return "order accepted";
+  }
 }
