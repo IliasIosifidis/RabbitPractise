@@ -1,0 +1,8 @@
+Single slow command
+curl -X POST http://localhost:8080/tasks -H "Content-Type: text/plain" -d "the-test"
+
+loop of 10 orders for the slow order
+for /L %i in (1,1,20) do curl -X POST http://localhost:8080/tasks -H "Content-Type: text/plain" -d "task-%i"
+
+an order for the fanout 3 listeners
+curl -X POST http://localhost:8080/orders -H "Content-Type: text/plain" -d "order-42"
